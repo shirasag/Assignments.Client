@@ -1,0 +1,51 @@
+
+<nav>
+  <a routerLink="/newAssignment" class="ui-button-rounded ui-button-success">+ new assignment</a>
+</nav>
+<br/><br/>
+<p-table [value]="assignments" [columns]="cols" sortMode="multiple" [(selection)]="selectedAssignments" dataKey="id">
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th style="width: 2.25em">
+        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+      </th>
+      <ng-container *ngFor="let col of columns">
+        <th *ngIf="col.type !== 'Button'" [pSortableColumn]="col.field">
+          {{ col.header }}
+          <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+        </th>
+        <th *ngIf="col.type === 'Button'">
+          {{ col.header }}         
+        </th>
+      </ng-container>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-assignment let-rowData let-columns="columns">
+    <tr>
+      <td>
+        <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+      </td>
+      <td *ngFor="let col of columns" [ngSwitch]="col.type">
+        <ng-template ngSwitchCase="Label">
+          {{rowData[col.field]}}
+        </ng-template>
+        <ng-template ngSwitchCase="Checkbox">
+          <p-checkbox name="groupname" value="rowData[col.field]" [(ngModel)]="rowData[col.field]" [binary]="true"></p-checkbox>
+        </ng-template>
+        <ng-template ngSwitchCase="Button" >
+          <p-button *ngIf="col.field === 'delete'" label="Delete" (onClick)="handleClick()" class="ui-button-rounded ui-button-danger"></p-button>
+          <p-button *ngIf="col.field === 'archive'" label="Archive" (onClick)="handleClick()" class="ui-button-rounded ui-button-success"></p-button>     
+        </ng-template>
+    
+
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary">
+    <ul>
+      <li *ngFor="let ass of selectedAssignments" style="text-align: left">
+        {{ass.id + ' - ' + ass.type + ' - ' + ass.name}}
+      </li>
+    </ul>
+  </ng-template>
+</p-table>

@@ -1,0 +1,41 @@
+
+
+<nav>
+  <a routerLink="/assignmentsGrid" class="btn">return to grid</a>
+</nav>
+<br />
+<br />
+
+<form [formGroup]="newAssignmentForm" (ngSubmit)="onSubmit(newAssignmentForm.value)">
+  <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-2"><label for="type">Type: </label></div>
+      <div class="ui-grid-col-6"><input id="type" type="text" formControlName="type" pInputText></div>
+    </div>
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-2"><label for="name">Name : </label></div>
+      <div class="ui-grid-col-6"><input id="name" type="text" formControlName="name" pInputText></div>
+    </div>
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-2"><label for="desc">Description : </label></div>
+      <div class="ui-grid-col-6"><input id="desc" type="text" formControlName="desc" pInputText></div>
+    </div>
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-2"><label for="startDate">Start At : </label></div>
+      <div class="ui-grid-col-6"><input id="startDate" type="text" formControlName="startDate" pInputText></div>
+    </div>
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-2"><label for="endDate">End At (optional) : </label></div>
+      <div class="ui-grid-col-6"><input id="endDate" type="text" formControlName="endDate" pInputText></div>
+    </div>
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-2"><label for="isRepeated">Repeatition : </label></div>
+      <div class="ui-grid-col-6"><input id="isRepeated" type="text" formControlName="isRepeated" pInputText></div>
+    </div>
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-2"> <button pButton type="submit" label="Submit" [disabled]="!newAssignmentForm.valid"></button></div>
+    </div>
+
+  </div>
+</form>
+
