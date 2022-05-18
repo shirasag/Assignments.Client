@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { TableModule } from 'primeng/table';
@@ -13,6 +14,8 @@ import { AssignmentsGridComponent } from './assignments-grid/assignments-grid.co
 import { NewAssignmentFormComponent } from './new-assignment-form/new-assignment-form.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { AssignmentInterceptor } from './_helpers/assignment.interceptor';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,6 +24,7 @@ import { AppRoutingModule } from './app-routing.module';
   ],
   imports: [
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
     BrowserModule,
     TableModule,
@@ -30,7 +34,7 @@ import { AppRoutingModule } from './app-routing.module';
     InputTextModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [AssignmentInterceptor],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

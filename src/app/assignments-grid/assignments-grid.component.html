@@ -30,11 +30,11 @@
           {{rowData[col.field]}}
         </ng-template>
         <ng-template ngSwitchCase="Checkbox">
-          <p-checkbox name="groupname" value="rowData[col.field]" [(ngModel)]="rowData[col.field]" [binary]="true"></p-checkbox>
+          <p-checkbox name="groupname" value="rowData[col.field]" [(ngModel)]="rowData[col.field]" [binary]="true" (onChange)="end($event,rowData.id)"></p-checkbox>
         </ng-template>
         <ng-template ngSwitchCase="Button" >
-          <p-button *ngIf="col.field === 'delete'" label="Delete" (onClick)="handleClick()" class="ui-button-rounded ui-button-danger"></p-button>
-          <p-button *ngIf="col.field === 'archive'" label="Archive" (onClick)="handleClick()" class="ui-button-rounded ui-button-success"></p-button>     
+          <p-button *ngIf="col.field === 'delete'" label="Delete" (onClick)="delete(rowData.id)" class="ui-button-rounded ui-button-danger"></p-button>
+          <p-button *ngIf="col.field === 'archive'" label="Archive" (onClick)="archive(rowData.id)" class="ui-button-rounded ui-button-success"></p-button>     
         </ng-template>
     
 

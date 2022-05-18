@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { TableModule } from 'primeng/table';
+import { first } from 'rxjs/operators';
 
 import { Assignment } from '../assignment';
 import { Assignments } from '../mock-assignments';
+import { AssignmentService } from '../_services/assignment.service';
 
 @Component({
   selector: 'app-assignments-grid',
@@ -11,11 +13,11 @@ import { Assignments } from '../mock-assignments';
 })
 export class AssignmentsGridComponent implements OnInit {
 
-  assignments: Assignment[] = Assignments;
+  assignments: Assignment[] = [];
   cols: any[] = [];
   selectedAssignments: Assignment[] = [];
 
-  constructor() { }
+  constructor(public assignmentService: AssignmentService) { }
 
   ngOnInit(): void {
     this.cols = [
@@ -32,9 +34,26 @@ export class AssignmentsGridComponent implements OnInit {
       { field: 'delete', type: 'Button' },
       { field: 'archive', type: 'Button' },
     ];
+    this.getAll();
   }
 
-  handleClick() {
-    //execute action
+  getAll() {
+    this.assignmentService.getAll().subscribe((resp: any) => {
+      this.assignments = resp;
+    });
   }
+
+  delete(id: number) {
+    this.assignmentService.delete(id).subscribe((resp: any) => this.assignments = this.assignments.filter(x => x.id !== id));
+  }
+
+  archive(id: number) {
+  }
+
+  end(event: any, id: number) {
+    if (event.checked) {
+
+    }
+  }
+  
 }
