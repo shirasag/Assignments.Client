@@ -23,18 +23,16 @@ export class AssignmentService {
     )
   }
 
-  delete(id: number) {
-    console.log("id: " + id);
+  delete(id: number) {    
     return this.http.delete(Assignment_API + '/' + id).pipe(resp => { return resp; });
    
   }
 
   archive(id: number) {
-
+    return this.http.post<any>(Assignment_API + '/Archive/' + id, {}).pipe(resp => { return resp; });
   }
 
-  end(id: number) {
-    //const body = { isEnded : true};
-    //this.http.put<Assignment>(Assignment_API +'/EndAssignment/'+id,body)
+  end(id: number) {   
+    return this.http.post<any>(Assignment_API + '/End/' + id, {}).pipe(resp => { return resp; });
   }
 }

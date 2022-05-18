@@ -48,11 +48,24 @@ export class AssignmentsGridComponent implements OnInit {
   }
 
   archive(id: number) {
+    this.assignmentService.archive(id).subscribe((resp: any) => {
+      var ass = this.assignments.find(x => x.id === id)
+      if (ass != undefined) {
+        ass.isArchived = true;
+      }
+
+    });
   }
 
-  end(event: any, id: number) {
+  end(event: any, id: number) {    
     if (event.checked) {
-
+      this.assignmentService.end(id).subscribe((resp: any) => {
+        var ass = this.assignments.find(x => x.id === id)        
+        if (ass != undefined) {
+          ass.status = true;
+        }
+        
+      });
     }
   }
   
