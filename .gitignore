@@ -20,9 +20,10 @@ yarn-error.log
 *.sublime-workspace
 *.spec/ts
 
+
 # Visual Studio Code
 .vscode/*
-
+.vs
 
 .history/*
 

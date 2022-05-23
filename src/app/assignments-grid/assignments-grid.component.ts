@@ -37,21 +37,20 @@ export class AssignmentsGridComponent implements OnInit {
   }
 
   getAll() {
-    this.assignmentService.getAll().subscribe((resp: any) => {
-      this.assignments = resp;
-      console.log(this.assignments) ;
+    this.assignmentService.getAll().subscribe((resp: Assignment[]) => {
+      this.assignments = resp;     
     });
   }
 
   delete(id: number) {
-    this.assignmentService.delete(id).subscribe((resp: any) => this.assignments = this.assignments.filter(x => x.id !== id));
+    this.assignmentService.delete(id).subscribe((resp: Assignment) => this.assignments = this.assignments.filter(x => x.id !== id));
   }
 
   archive(id: number) {
-    this.assignmentService.archive(id).subscribe((resp: any) => {
-      var ass = this.assignments.find(x => x.id === id)
-      if (ass != undefined) {
-        ass.isArchived = true;
+    this.assignmentService.archive(id).subscribe((resp: Assignment) => {
+      const assignment = this.assignments.find(x => x.id === id)
+      if (assignment) {
+        assignment.isArchived = true;
       }
 
     });
@@ -59,10 +58,10 @@ export class AssignmentsGridComponent implements OnInit {
 
   end(event: any, id: number) {    
     if (event.checked) {
-      this.assignmentService.end(id).subscribe((resp: any) => {
-        var ass = this.assignments.find(x => x.id === id)        
-        if (ass != undefined) {
-          ass.status = 1;
+      this.assignmentService.end(id).subscribe((resp: Assignment) => {
+        const assignment = this.assignments.find(x => x.id === id)        
+        if (assignment) {
+          assignment.status = 1;
         }
         
       });
