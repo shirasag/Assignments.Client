@@ -10,27 +10,42 @@
   <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
     <div class="ui-grid-row">
       <div class="ui-grid-col-2"><label for="type">Type: </label></div>
-      <div class="ui-grid-col-6"><input id="type" type="text" formControlName="type" pInputText></div>
+      <div class="ui-grid-col-6"><p-dropdown [options]="this.types" id="type" formControlName="type" optionLabel="name" optionValue="code" placeholder="Choose Type"></p-dropdown></div>
+      <div class="ui-grid-col-4">
+        <p-message severity="error" text="Type is required" *ngIf="!newAssignmentForm.controls['type'].valid && newAssignmentForm.controls['type'].dirty"></p-message>
+      </div>
     </div>
     <div class="ui-grid-row">
       <div class="ui-grid-col-2"><label for="name">Name : </label></div>
       <div class="ui-grid-col-6"><input id="name" type="text" formControlName="name" pInputText></div>
+      <div class="ui-grid-col-4">
+        <p-message severity="error" text="Name is required" *ngIf="!newAssignmentForm.controls['name'].valid && newAssignmentForm.controls['name'].dirty"></p-message>
+      </div>
     </div>
     <div class="ui-grid-row">
       <div class="ui-grid-col-2"><label for="desc">Description : </label></div>
       <div class="ui-grid-col-6"><input id="desc" type="text" formControlName="desc" pInputText></div>
+      <div class="ui-grid-col-4">
+        <p-message severity="error" text="Description is required" *ngIf="!newAssignmentForm.controls['desc'].valid && newAssignmentForm.controls['desc'].dirty"></p-message>
+      </div>
     </div>
     <div class="ui-grid-row">
       <div class="ui-grid-col-2"><label for="startDate">Start At : </label></div>
-      <div class="ui-grid-col-6"><input id="startDate" type="text" formControlName="startDate" pInputText></div>
+      <div class="ui-grid-col-6"><p-calendar id="startDate" formControlName="startDate" dateFormat="dd/mm/yy" [showIcon]="true" [showButtonBar]="true"></p-calendar></div>
+      <div class="ui-grid-col-4">
+        <p-message severity="error" text="Start Date is required" *ngIf="!newAssignmentForm.controls['startDate'].valid && newAssignmentForm.controls['startDate'].dirty"></p-message>
+      </div>
     </div>
     <div class="ui-grid-row">
       <div class="ui-grid-col-2"><label for="endDate">End At (optional) : </label></div>
-      <div class="ui-grid-col-6"><input id="endDate" type="text" formControlName="endDate" pInputText></div>
+      <div class="ui-grid-col-6"><p-calendar id="endDate" formControlName="endDate" dateFormat="dd/mm/yy" [showIcon]="true" [showButtonBar]="true"></p-calendar></div>
     </div>
     <div class="ui-grid-row">
       <div class="ui-grid-col-2"><label for="isRepeated">Repeatition : </label></div>
-      <div class="ui-grid-col-6"><input id="isRepeated" type="text" formControlName="isRepeated" pInputText></div>
+      <div class="ui-grid-col-6"><p-dropdown [options]="this.repeatition" id="isRepeated" formControlName="isRepeated" optionLabel="name" optionValue="code" placeholder="Choose repeatition"></p-dropdown></div>
+      <div class="ui-grid-col-4">
+        <p-message severity="error" text="Repeatition is required" *ngIf="!newAssignmentForm.controls['isRepeated'].valid && newAssignmentForm.controls['isRepeated'].dirty"></p-message>
+      </div>
     </div>
     <div class="ui-grid-row">
       <div class="ui-grid-col-2"> <button pButton type="submit" label="Submit" [disabled]="!newAssignmentForm.valid"></button></div>

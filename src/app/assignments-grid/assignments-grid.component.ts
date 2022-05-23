@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TableModule } from 'primeng/table';
 import { first } from 'rxjs/operators';
 
-import { Assignment } from '../assignment';
-import { Assignments } from '../mock-assignments';
+import { Assignment, status, types } from '../assignment';
 import { AssignmentService } from '../_services/assignment.service';
 
 @Component({
@@ -16,13 +14,14 @@ export class AssignmentsGridComponent implements OnInit {
   assignments: Assignment[] = [];
   cols: any[] = [];
   selectedAssignments: Assignment[] = [];
-
+  status = status;
+  types = types;
   constructor(public assignmentService: AssignmentService) { }
 
   ngOnInit(): void {
     this.cols = [
       { field: 'id', header: 'ID' , type:'Label'},
-      { field: 'type', header: 'Type', type: 'Label' },
+      { field: 'type', header: 'Type', type: 'Enum' },
       { field: 'name', header: 'Name', type: 'Label' },
       { field: 'desc', header: 'Description', type: 'Label' },
       { field: 'startDate', header: 'Start At', type: 'Label' },
@@ -30,7 +29,7 @@ export class AssignmentsGridComponent implements OnInit {
       { field: 'isRepeated', header: 'Repeatedly', type: 'Label' },
       { field: 'isEnded', header: 'End', type: 'Checkbox' },
       { field: 'isArchived', header: 'Archived', type: 'Label' },
-      { field: 'status', header: 'Status', type: 'Label' },
+      { field: 'status', header: 'Status', type: 'Enum' },
       { field: 'delete', type: 'Button' },
       { field: 'archive', type: 'Button' },
     ];
@@ -40,6 +39,7 @@ export class AssignmentsGridComponent implements OnInit {
   getAll() {
     this.assignmentService.getAll().subscribe((resp: any) => {
       this.assignments = resp;
+      console.log(this.assignments) ;
     });
   }
 
@@ -62,7 +62,7 @@ export class AssignmentsGridComponent implements OnInit {
       this.assignmentService.end(id).subscribe((resp: any) => {
         var ass = this.assignments.find(x => x.id === id)        
         if (ass != undefined) {
-          ass.status = true;
+          ass.status = 1;
         }
         
       });

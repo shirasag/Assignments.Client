@@ -35,4 +35,11 @@ export class AssignmentService {
   end(id: number) {   
     return this.http.post<any>(Assignment_API + '/End/' + id, {}).pipe(resp => { return resp; });
   }
+
+  submitForm(assignment: Assignment) {
+    const headers = { 'content-type': 'application/json' }
+    const body = { type: Number(assignment.type), name: assignment.name, desc: assignment.desc, startDate: assignment.startDate, endDate: assignment.endDate, isRepeated: Boolean(assignment.isRepeated) };
+    console.log(body)
+    return this.http.post<Assignment>(Assignment_API, body, { 'headers': headers } ).pipe(resp => { return resp; });
+  }
 }

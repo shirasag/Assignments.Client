@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Assignment, types, repeatition } from '../assignment';
+import { AssignmentService } from '../_services/assignment.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-assignment-form',
@@ -8,24 +11,33 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class NewAssignmentFormComponent implements OnInit {
 
+  types = types;
+  repeatition = repeatition;
+  assignment: Assignment | undefined ;
+
   newAssignmentForm = new FormGroup({
-    type: new FormControl(''),
-    name: new FormControl(''),
+    type: new FormControl('', Validators.required),
+    name: new FormControl('', Validators.required),
     desc: new FormControl(''),
-    startDate: new FormControl(''),
+    startDate: new FormControl('', Validators.required),
     endDate: new FormControl(''),
-    isRepeated: new FormControl('')
+    isRepeated: new FormControl('', Validators.required)
   });
 
 
 
-  constructor() { }
+  constructor(public assignmentService: AssignmentService, private router: Router) { }
 
   ngOnInit(): void {
-  }
+    console.log(this.types);
+  } 
+
   onSubmit(value: string) {
 
-    // TODO: Use EventEmitter with form value
-    console.warn(this.newAssignmentForm.value);
+    this.assignment = new Assignment(this.newAssignmentForm.value);
+    this.assignment.type = this.newAssignmentForm.controls['type'].value;
+    this.assignment.isRepeated = this.newAssignmentForm.controls['isRepeated'].value; 
+  
+    this.assignmentService.submitForm(this.assignment).subscribe(() => this.router.navigate(['/assignmentsGrid']));
   }
 }
