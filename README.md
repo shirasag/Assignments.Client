@@ -3,7 +3,7 @@
 This project was generated with [Angular CLI] version 13.3.5.
 
 This project develop with typescript and contains use of RxJS and httpclient to connect with server api via service, 
-PrimeNG library, app-routing, etc.
+PrimeNG library, app-routing, Reactive Forms + Validation,  etc.
 
 It was develop in an agile git method
 
