@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { first } from 'rxjs/operators';
 
 import { Assignment, status, types } from '../assignment';
 import { AssignmentService } from '../_services/assignment.service';
+import { SelectItem } from 'primeng/api';
 
 @Component({
   selector: 'app-assignments-grid',
@@ -16,6 +16,8 @@ export class AssignmentsGridComponent implements OnInit {
   selectedAssignments: Assignment[] = [];
   status = status;
   types = types;
+  options: SelectItem[] = [{ label: 'All assignments', value: null }, { label: 'Archived', value: true }, { label: 'Not Archived', value: false }];
+
   constructor(public assignmentService: AssignmentService) { }
 
   ngOnInit(): void {

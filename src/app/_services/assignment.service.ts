@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
 import { Assignment } from '../assignment';
 
 const Assignment_API = 'https://localhost:44332/api/Assignments';
@@ -29,17 +28,16 @@ export class AssignmentService {
   }
 
   archive(id: number) {
-    return this.http.post<any>(Assignment_API + '/Archive/' + id, {}).pipe(resp => { return resp; });
+    return this.http.put<any>(Assignment_API + '/Archive/' + id, {}).pipe(resp => { return resp; });
   }
 
   end(id: number) {   
-    return this.http.post<any>(Assignment_API + '/End/' + id, {}).pipe(resp => { return resp; });
+    return this.http.put<any>(Assignment_API + '/End/' + id, {}).pipe(resp => { return resp; });
   }
 
   submitForm(assignment: Assignment) {
     const headers = { 'content-type': 'application/json' }
-    const body = { type: Number(assignment.type), name: assignment.name, desc: assignment.desc, startDate: assignment.startDate, endDate: assignment.endDate, isRepeated: Boolean(assignment.isRepeated) };
-    console.log(body)
+    const body = { type: Number(assignment.type), name: assignment.name, desc: assignment.desc, startDate: assignment.startDate, endDate: assignment.endDate ? assignment.endDate : undefined, isRepeated: Boolean(assignment.isRepeated) };   
     return this.http.post<Assignment>(Assignment_API, body, { 'headers': headers } ).pipe(resp => { return resp; });
   }
 }

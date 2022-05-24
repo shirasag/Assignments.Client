@@ -3,7 +3,7 @@
   <a routerLink="/newAssignment" class="ui-button-rounded ui-button-success">+ new assignment</a>
 </nav>
 <br/><br/>
-<p-table [value]="assignments" [columns]="cols" sortMode="multiple" [(selection)]="selectedAssignments" dataKey="id">
+<p-table #dt [value]="assignments" [columns]="cols" sortMode="multiple" [(selection)]="selectedAssignments" dataKey="id">
   <ng-template pTemplate="header" let-columns>
     <tr>
       <th style="width: 2.25em">
@@ -15,9 +15,15 @@
           <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
         </th>
         <th *ngIf="col.type === 'Button'">
-          {{ col.header }}         
+          {{ col.header }}
         </th>
       </ng-container>
+    </tr>
+    <tr>
+      <th></th>
+      <th *ngFor="let col of columns" [ngSwitch]="col.field">       
+        <p-dropdown *ngSwitchCase="'isArchived'" [options]="options" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>        
+      </th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-assignment let-rowData let-columns="columns">

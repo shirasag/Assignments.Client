@@ -28,8 +28,7 @@ export class NewAssignmentFormComponent implements OnInit {
 
   constructor(public assignmentService: AssignmentService, private router: Router) { }
 
-  ngOnInit(): void {
-    console.log(this.types);
+  ngOnInit(): void {    
   } 
 
   onSubmit(value: string) {
