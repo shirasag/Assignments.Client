@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 
 import { AppComponent } from './app.component';
@@ -20,7 +20,6 @@ import { MessageModule } from 'primeng/message';
 
 
 import { AppRoutingModule } from './app-routing.module';
-import { AssignmentInterceptor } from './_helpers/assignment.interceptor';
 
 @NgModule({
   declarations: [
@@ -44,7 +43,7 @@ import { AssignmentInterceptor } from './_helpers/assignment.interceptor';
     MessageModule,
     AppRoutingModule
   ],
-  providers: [AssignmentInterceptor],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
