@@ -14,7 +14,7 @@ It was develop in an agile git method
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files. Source is in this link: `https://github.com/shirasag/Assignment.API.git`
 
 ## Backend
 The server is using .Net core 6.0.
